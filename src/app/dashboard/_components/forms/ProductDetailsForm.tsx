@@ -16,9 +16,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { productDetailsSchema } from "@/schemas/products";
 import { createProduct } from "@/server/actions/products";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+
 export function ProductDetailsForm() {
   const { toast } = useToast();
+
   const form = useForm<z.infer<typeof productDetailsSchema>>({
     resolver: zodResolver(productDetailsSchema),
     defaultValues: {
@@ -46,7 +49,39 @@ export function ProductDetailsForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex gap-6 flex-col"
       >
-        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2"></div>
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Product Name</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="url"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Enter your website URL</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormDescription>
+                  Include the protocol (http/https) and the full path to the
+                  sales page
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
         <FormField
           control={form.control}
           name="description"

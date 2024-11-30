@@ -10,3 +10,4 @@ export function deleteUser(clerkUserId: string) {
     db.delete(ProductTable).where(eq(ProductTable.clerkUserId, clerkUserId)),
   ]);
 }
+

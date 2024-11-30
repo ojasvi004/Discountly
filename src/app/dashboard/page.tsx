@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
-import { getProducts } from "../server/db/products";
+import { getProducts } from "../../server/db/products";
 import { NoProducts } from "./_components/NoProducts";
 
 const DashboardPage = async () => {

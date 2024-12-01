@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { createProduct as createProductDb } from "../db/products";
 import { redirect } from "next/navigation";
+import { deleteProduct as deleteProductDb } from "../db/products";
 
 export async function createProduct(
   unsafeData: z.infer<typeof productDetailsSchema>
@@ -19,4 +20,15 @@ export async function createProduct(
   const { id } = await createProductDb({ ...data, clerkUserId: userId });
 
   redirect(`/dashboard/products/${id}/edit?tab=countries`);
+}
+
+export async function deleteProduct(id: string) {
+  const { userId } = await auth();
+  if (userId == null) {
+    return {
+      error: true,
+      message: "there was an  error deleting your product",
+    };
+  }
+  await deleteProductDb({ id, userId });
 }

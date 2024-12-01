@@ -51,7 +51,7 @@ export function ProductCard({
   description?: string | null;
 }) {
   return (
-    <Card>
+ <Card className="hover:bg-accent/5">
       <CardHeader>
         <div className="flex gap-2 justify-between items-end">
           <CardTitle>

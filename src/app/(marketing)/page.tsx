@@ -15,6 +15,7 @@ import { TiVendorMicrosoft } from "react-icons/ti";
 import { FaXTwitter } from "react-icons/fa6";
 import { formatCompactNumber } from "../../lib/formatters";
 import { subscriptionTiersInOrder } from "@/data/subscriptionTiers";
+import { MoveRight } from "lucide-react";
 
 import {
   Card,
@@ -32,17 +33,29 @@ import Link from "next/link";
 const HomePage = () => {
   return (
     <>
-      <section className="min-h-screen bg-[radial-gradient(hsl(0,72%,65%,40%),hsl(24,62%,73%,40%),hsl(var(--background))_60%)] flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
+      <section className="min-h-screen text-white bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-indigo-800 via-slate-900 to-slate-950 flex items-center justify-center text-center text-balance flex-col gap-8 px-4">
         <h1 className="text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight m-4">
-          Maximize Sales, Optimize Pricing Across Regions!
+          Maximize Sales,{" "}
+          <span
+            style={{
+              backgroundImage: "linear-gradient(to top, #818cf8, transparent)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            Optimize Pricing{" "}
+          </span>
+          Across Regions!
         </h1>
-        <p className="text-lg lg:text-3xl max-w-screen-xl">
+
+        <p className="text-lg text-gray-300/50 font-medium lg:text-3xl max-w-screen-xl">
           Capture 85% of the untapped market with dynamic, location-based
           pricing strategies to ensure you’re always offering competitive rates.
         </p>
         <SignUpButton>
-          <Button className="text-lg p-6 rounded-2xl flex gap-2">
-            Get started for free
+          <Button className="text-lg p-6  bg-background/0 rounded-full border-2 hover:bg-background/0 flex gap-2">
+            Get started for free <MoveRight />
           </Button>
         </SignUpButton>
       </section>
@@ -65,9 +78,10 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section id="pricing" className=" px-8 py-16 bg-accent/5">
+      <section id="pricing" className=" px-8 py-16 bg-slate-950 text-white">
         <h2 className="text-4xl text-center text-balance font-semibold mb-8">
-          Pricing software which pays for itself 20x over
+          Pricing software which pays for itself{" "}
+          <span className="text-indigo-400">20x</span> over
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto">
           {subscriptionTiersInOrder.map((tier) => (
@@ -75,7 +89,7 @@ const HomePage = () => {
           ))}
         </div>
       </section>
-      <footer className="container pt-16 pb-8 flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-start">
+      <footer className="text-white pl-10 pr-10 bg-slate-950 pt-16 pb-8 flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-start">
         <Link href="/">
           <BrandLogo />
         </Link>
@@ -163,16 +177,18 @@ function PricingCard({
     <Card
       className={cn(
         "relative shadow-none rounded-3xl overflow-hidden",
-        isMostPopular ? "border-accent border-2" : "border-none"
+        isMostPopular
+          ? "border-indigo-500 border-2 shadow-[0px_0px_90px_7px_rgba(78,_24,_191,_0.51)]"
+          : "border-none"
       )}
     >
       {isMostPopular && (
-        <div className="bg-accent text-accent-foreground absolute py-1 px-10 -right-8 top-24 rotate-45 origin-top-right">
+        <div className="bg-indigo-500 text-accent-foreground absolute py-1 px-10 -right-8 top-24 rotate-45 origin-top-right">
           Most popular
         </div>
       )}
       <CardHeader>
-        <div className="text-accent font-semibold mb-8">{name}</div>
+        <div className="text-indigo-500 font-semibold mb-8">{name}</div>
         <CardTitle className="text-xl font-bold">
           ₹{priceInRupees} /mo
         </CardTitle>
@@ -184,7 +200,7 @@ function PricingCard({
         <SignUpButton>
           <Button
             className="text-lg w-full rounded-lg"
-            variant={isMostPopular ? "accent" : "default"}
+            variant={isMostPopular ? "default" : "default"}
           >
             Get Started
           </Button>
@@ -213,7 +229,7 @@ function Feature({
 }) {
   return (
     <div className={cn("flex items-center gap-2", className)}>
-      <CheckIcon className="size-4 stroke-accent bg-accent/25 rounded-full p-0.5" />
+      <CheckIcon className="size-4 stroke-indigo-500 bg-indigo-500/25 rounded-full p-0.5" />
       <span>{children}</span>
     </div>
   );
@@ -228,7 +244,7 @@ function FooterLinkGroup({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="font-semibold">{title}</h3>
+      <h3 className="font-semibold text-indigo-400">{title}</h3>
       <ul className="flex flex-col gap-2 text-sm">
         {links.map((link) => (
           <li key={link.href}>

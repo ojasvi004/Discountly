@@ -51,7 +51,7 @@ export function ProductCard({
   description?: string | null;
 }) {
   return (
- <Card className="hover:bg-accent/5">
+    <Card className="hover:bg-zinc-800 bg-zinc-900 border-zinc-600 text-zinc-200">
       <CardHeader>
         <div className="flex gap-2 justify-between items-end">
           <CardTitle>
@@ -61,7 +61,7 @@ export function ProductCard({
             <AlertDialog>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="size-8 p-0">
+                  <Button variant="outline" className="size-8 p-0 bg-inherit">
                     <div className="sr-only">Action Menu</div>
                     <DotsHorizontalIcon className="size-4" />
                   </Button>

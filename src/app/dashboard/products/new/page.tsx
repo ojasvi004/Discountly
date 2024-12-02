@@ -8,7 +8,7 @@ export default function NewProductPage() {
       pageTitle="Create Product"
       backButtonHref="/dashboard/products"
     >
-      <Card>
+      <Card className="bg-zinc-900 text-white border-zinc-500">
         <CardHeader>
           <CardTitle className="text-xl">Product Details</CardTitle>
         </CardHeader>

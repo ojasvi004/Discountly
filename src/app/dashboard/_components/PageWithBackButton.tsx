@@ -13,8 +13,13 @@ export function PageWithBackButton({
   children: ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-8">
-      <Button size="icon" variant="outline" className="rounded-full" asChild>
+    <div className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-8 ">
+      <Button
+        size="icon"
+        variant="outline"
+        className="rounded-full bg-zinc-900"
+        asChild
+      >
         <Link href={backButtonHref}>
           <div className="sr-only">Back</div>
           <CaretLeftIcon className="size-8" />

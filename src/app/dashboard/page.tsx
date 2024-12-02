@@ -26,7 +26,7 @@ const DashboardPage = async () => {
   }
 
   return (
-    <>
+    <div>
       <h2 className="mb-6 text-3xl font-semibold flex justify-between">
         <Link
           className="group flex gap-2 items-center hover:underline"
@@ -35,15 +35,15 @@ const DashboardPage = async () => {
           Products
           <ArrowRightIcon className="group-hover:translate-x-1 transition-transform" />
         </Link>
-        <Button asChild>
+        <Button asChild className="bg-zinc-100 text-black hover:bg-white">
           <Link href="/dashboard/products/new">
-            <PlusIcon className="size-4 mr-2" />
+            <PlusIcon className="size-4 mr-2 " />
             New Product
           </Link>
         </Button>
       </h2>
       <ProductGrid products={products} />
-    </>
+    </div>
   );
 };
 

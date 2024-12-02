@@ -49,7 +49,7 @@ export function ProductDetailsForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex gap-6 flex-col"
       >
-        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
+        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 ">
           <FormField
             control={form.control}
             name="name"
@@ -57,7 +57,10 @@ export function ProductDetailsForm() {
               <FormItem>
                 <FormLabel>Product Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    className="border border-zinc-600 rounded-md focus:ring-2 focus:ring-zinc-500"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -70,7 +73,10 @@ export function ProductDetailsForm() {
               <FormItem>
                 <FormLabel>Enter your website URL</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    className="border border-zinc-600 rounded-md focus:ring-2 focus:ring-zinc-500"
+                  />
                 </FormControl>
                 <FormDescription>
                   Include the protocol (http/https) and the full path to the
@@ -89,7 +95,10 @@ export function ProductDetailsForm() {
             <FormItem>
               <FormLabel>Product Description</FormLabel>
               <FormControl>
-                <Textarea className="min-h-20 resize-none" {...field} />
+                <Textarea
+                  {...field}
+                  className="min-h-20 resize-none border border-zinc-600 rounded-md focus:ring-2 focus:ring-zinc-500"
+                />
               </FormControl>
               <FormDescription>
                 An optional description to help distinguish your product from
@@ -100,7 +109,11 @@ export function ProductDetailsForm() {
           )}
         />
         <div className="self-end">
-          <Button disabled={form.formState.isSubmitting} type="submit">
+          <Button
+            className="bg-zinc-200 text-black"
+            disabled={form.formState.isSubmitting}
+            type="submit"
+          >
             Save
           </Button>
         </div>

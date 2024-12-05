@@ -13,6 +13,7 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { getProductCountryGroups } from "@/server/db/products";
 import { CountryDiscountsForm } from "@/app/dashboard/_components/forms/CountryDiscountsForm";
+import { canCustomizeBanner, canRemoveBranding } from "@/server/permissions";
 
 export default async function EditProductPage({
   params: { productId },
@@ -116,11 +117,17 @@ async function CustomizationsTab({
   if (customization == null) return notFound();
 
   return (
-    <Card className="bg-zinc-900 text-white border-zinc-500 mt-5">
+    <Card>
       <CardHeader>
         <CardTitle className="text-xl">Banner Customization</CardTitle>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>
+        <ProductCustomizationForm
+          canRemoveBranding={await canRemoveBranding(userId)}
+          canCustomizeBanner={await canCustomizeBanner(userId)}
+          customization={customization}
+        />
+      </CardContent>
     </Card>
   );
 }

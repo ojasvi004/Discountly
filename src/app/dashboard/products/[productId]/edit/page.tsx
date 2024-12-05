@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getProduct } from "@/server/db/products";
+import { getProduct, getProductCustomization } from "@/server/db/products";
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { getProductCountryGroups } from "@/server/db/products";
@@ -44,7 +44,9 @@ export default async function EditProductPage({
         <TabsContent value="countries">
           <CountryTab productId={productId} userId={userId} />
         </TabsContent>
-        <TabsContent value="customization"></TabsContent>
+        <TabsContent value="customization">
+          <CustomizationsTab productId={productId} userId={userId} />
+        </TabsContent>
       </Tabs>
     </PageWithBackButton>
   );
@@ -98,6 +100,27 @@ async function CountryTab({
           countryGroups={countryGroups}
         />
       </CardContent>
+    </Card>
+  );
+}
+
+async function CustomizationsTab({
+  productId,
+  userId,
+}: {
+  productId: string;
+  userId: string;
+}) {
+  const customization = await getProductCustomization({ productId, userId });
+
+  if (customization == null) return notFound();
+
+  return (
+    <Card className="bg-zinc-900 text-white border-zinc-500 mt-5">
+      <CardHeader>
+        <CardTitle className="text-xl">Banner Customization</CardTitle>
+      </CardHeader>
+      <CardContent></CardContent>
     </Card>
   );
 }

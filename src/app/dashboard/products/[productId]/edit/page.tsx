@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { getProductCountryGroups } from "@/server/db/products";
 import { CountryDiscountsForm } from "@/app/dashboard/_components/forms/CountryDiscountsForm";
 import { canCustomizeBanner, canRemoveBranding } from "@/server/permissions";
+import ProductCustomizationForm from "@/app/dashboard/_components/forms/ProductCustomizationForm";
 
 export default async function EditProductPage({
   params: { productId },

@@ -4,10 +4,7 @@ import { ProductDetailsForm } from "../../_components/forms/ProductDetailsForm";
 
 export default function NewProductPage() {
   return (
-    <PageWithBackButton
-      pageTitle="Create Product"
-      backButtonHref="/dashboard/products"
-    >
+    <PageWithBackButton pageTitle="Create Product" backButtonHref="/dashboard">
       <Card className="bg-zinc-900 text-white border-zinc-500">
         <CardHeader>
           <CardTitle className="text-xl">Product Details</CardTitle>

@@ -10,6 +10,7 @@ import {
   getUserTag,
   revalidateDbCache,
   getIdTag,
+  getGlobalTag,
 } from "@/lib/cache";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { BatchItem } from "drizzle-orm/batch";
@@ -131,8 +132,8 @@ export function getProductCountryGroups({
   const cacheFn = dbCache(getProductCountryGroupsInternal, {
     tags: [
       getIdTag(productId, CACHE_TAGS.products),
-      // getGlobalTag(CACHE_TAGS.countries),
-      // getGlobalTag(CACHE_TAGS.countryGroups),
+      getGlobalTag(CACHE_TAGS.countries),
+      getGlobalTag(CACHE_TAGS.countryGroups),
     ],
   });
 

@@ -60,7 +60,7 @@ export function ProductDetailsForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex gap-6 flex-col"
+        className="flex gap-6 flex-col bg-zinc-900 text-white border-zinc-500"
       >
         <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 ">
           <FormField

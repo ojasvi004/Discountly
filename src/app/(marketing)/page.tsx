@@ -98,7 +98,7 @@ const HomePage = () => {
             <FooterLinkGroup
               title="Help"
               links={[
-                { label: "EquiDeals Discounts", href: "#" },
+                { label: "Discountly Discounts", href: "#" },
                 { label: "Discount API", href: "#" },
               ]}
             />
@@ -114,7 +114,7 @@ const HomePage = () => {
           <div className="flex flex-col gap-8">
             <FooterLinkGroup
               title="Features"
-              links={[{ label: "EquiDeals Discounts", href: "#" }]}
+              links={[{ label: "Discountly Discounts", href: "#" }]}
             />
             <FooterLinkGroup
               title="Tools"
@@ -176,9 +176,9 @@ function PricingCard({
   return (
     <Card
       className={cn(
-        "relative shadow-none rounded-3xl overflow-hidden",
+        "relative shadow-none rounded-3xl overflow-hidden transform transition-transform",
         isMostPopular
-          ? "border-indigo-500 border-2 shadow-[0px_0px_90px_7px_rgba(78,_24,_191,_0.51)]"
+          ? "border-indigo-500 border-2 shadow-[0px_0px_90px_7px_rgba(78,_24,_191,_0.51)] z-10 scale-100 md:scale-105"
           : "border-none"
       )}
     >
@@ -211,13 +211,14 @@ function PricingCard({
           {maxNumberOfProducts}{" "}
           {maxNumberOfProducts === 1 ? "product" : "products"}
         </Feature>
-        <Feature>EquiDeals discounts</Feature>
+        <Feature>Discountly discounts</Feature>
         {canAccessAnalytics && <Feature>Advanced analytics</Feature>}
-        {canRemoveBranding && <Feature>Remove Easy EquiDeals branding</Feature>}
+        {canRemoveBranding && <Feature>Remove Easy Discountly branding</Feature>}
         {canCustomizeBanner && <Feature>Banner customization</Feature>}
       </CardFooter>
     </Card>
   );
+  
 }
 
 function Feature({

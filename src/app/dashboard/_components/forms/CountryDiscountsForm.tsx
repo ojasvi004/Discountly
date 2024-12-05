@@ -74,13 +74,16 @@ export function CountryDiscountsForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex gap-6 flex-col"
+        className="flex gap-6 flex-col bg-zinc-900 text-white border-zinc-500"
       >
         {countryGroups.map((group, index) => (
-          <Card key={group.id}>
+          <Card
+            key={group.id}
+            className="bg-zinc-900 text-white border-zinc-700 "
+          >
             <CardContent className="pt-6 flex gap-16 items-center">
               <div>
-                <h2 className="text-muted-foreground text-sm font-semibold mb-2">
+                <h2 className="text-muted-foreground text-zinc-400 text-sm font-semibold mb-2">
                   {group.name}
                 </h2>
                 <div className="flex gap-2 flex-wrap">
@@ -92,7 +95,7 @@ export function CountryDiscountsForm({
                       alt={country.name}
                       title={country.name}
                       src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${country.code.toUpperCase()}.svg`}
-                      className="border"
+                      className="border border-zinc-400"
                     />
                   ))}
                 </div>
@@ -108,7 +111,9 @@ export function CountryDiscountsForm({
                     name={`groups.${index}.discountPercentage`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Discount %</FormLabel>
+                        <FormLabel className="text-zinc-200">
+                          Discount %
+                        </FormLabel>
                         <FormControl>
                           <Input
                             className="w-24"
@@ -131,9 +136,9 @@ export function CountryDiscountsForm({
                     name={`groups.${index}.coupon`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Coupon</FormLabel>
+                        <FormLabel className="text-zinc-200">Coupon</FormLabel>
                         <FormControl>
-                          <Input className="w-48" {...field} />
+                          <Input className="w-48 text-zinc-200" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -149,7 +154,11 @@ export function CountryDiscountsForm({
         ))}
 
         <div className="self-end">
-          <Button disabled={form.formState.isSubmitting} type="submit">
+          <Button
+            disabled={form.formState.isSubmitting}
+            className="bg-zinc-200 text-zinc-900 hover:bg-zinc-300"
+            type="submit"
+          >
             Save
           </Button>
         </div>

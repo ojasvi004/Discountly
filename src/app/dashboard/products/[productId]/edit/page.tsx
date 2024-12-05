@@ -61,7 +61,7 @@ function DetailsTab({
   };
 }) {
   return (
-    <Card>
+    <Card className="bg-zinc-900 text-white border-zinc-500">
       <CardHeader>
         <CardTitle className="text-xl">Product Details</CardTitle>
       </CardHeader>
@@ -84,9 +84,9 @@ async function CountryTab({
   });
 
   return (
-    <Card>
+    <Card className="bg-zinc-900 text-white border-zinc-500">
       <CardHeader>
-        <CardTitle className="text-xl">Country Discounts</CardTitle>
+        <CardTitle className="text-xl ">Country Discounts</CardTitle>
         <CardDescription>
           Leave the discount field blank if you do not want to display deals for
           any specific parity group.

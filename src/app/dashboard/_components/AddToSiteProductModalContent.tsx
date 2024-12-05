@@ -22,11 +22,11 @@ export function AddToSiteProductModalContent({ id }: { id: string }) {
     <DialogContent className="max-w-max">
       <DialogHeader>
         <DialogTitle className="text-2xl">
-          Start Earning EquiDeals Sales!
+          Start Earning Discountly Sales!
         </DialogTitle>
         <DialogDescription>
           All you need to do is copy the below script into your site and your
-          customers will start seeing EquiDeals discounts!
+          customers will start seeing Discountly discounts!
         </DialogDescription>
       </DialogHeader>
       <pre className="mb-4 overflow-x-auto p-4 bg-secondary rounded max-w-screen-xl text-secondary-foreground">

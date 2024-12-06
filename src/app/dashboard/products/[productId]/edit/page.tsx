@@ -118,7 +118,7 @@ async function CustomizationsTab({
   if (customization == null) return notFound();
 
   return (
-    <Card>
+    <Card className="bg-zinc-900 text-white border-zinc-500">
       <CardHeader>
         <CardTitle className="text-xl">Banner Customization</CardTitle>
       </CardHeader>

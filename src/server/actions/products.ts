@@ -12,7 +12,7 @@ import { redirect } from "next/navigation";
 import { deleteProduct as deleteProductDb } from "../db/products";
 import { updateProduct as updateProductDb } from "../db/products";
 import { updateCountryDiscounts as updateCountryDiscountsDb } from "../db/products";
-import { canCustomizeBanner } from "../permissions";
+import { canCreateProduct, canCustomizeBanner } from "../permissions";
 import { updateProductCustomization as updateProductCustomizationDb } from "../db/products";
 
 export async function createProduct(
@@ -20,15 +20,17 @@ export async function createProduct(
 ): Promise<{ error: boolean; message: string } | undefined> {
   const { userId } = await auth();
   const { success, data } = productDetailsSchema.safeParse(unsafeData);
+  const canCreate = await canCreateProduct(userId);
 
-  if (!success || userId == null) {
-    return { error: true, message: "there was an error creating your product" };
+  if (!success || userId == null || !canCreate) {
+    return { error: true, message: "There was an error creating your product" };
   }
 
   const { id } = await createProductDb({ ...data, clerkUserId: userId });
 
   redirect(`/dashboard/products/${id}/edit?tab=countries`);
 }
+
 export async function updateProduct(
   id: string,
   unsafeData: z.infer<typeof productDetailsSchema>

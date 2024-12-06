@@ -21,6 +21,7 @@ import { Switch } from "@/components/ui/switch";
 import { Banner } from "@/components/Banner";
 import { updateProductCustomization } from "@/server/actions/products";
 import { useToast } from "@/hooks/use-toast";
+import { NoPermissionCard } from "@/components/NoPermissionCard";
 
 const ProductCustomizationForm = ({
   customization,
@@ -78,7 +79,11 @@ const ProductCustomizationForm = ({
           canRemoveBranding={canRemoveBranding}
         />
       </div>
-      {!canCustomizeBanner && <div className="mt-8"></div>}
+      {!canCustomizeBanner && (
+        <div className="mt-8">
+          <NoPermissionCard />
+        </div>
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -165,7 +170,7 @@ const ProductCustomizationForm = ({
                     <FormLabel>Sticky?</FormLabel>
                     <FormControl>
                       <Switch
-                        className="block"
+                        className="block border"
                         checked={field.value}
                         onCheckedChange={field.onChange}
                         disabled={!canCustomizeBanner}

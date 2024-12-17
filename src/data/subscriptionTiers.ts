@@ -7,7 +7,7 @@ export const subscriptionTiers = {
     priceInRupees: 0,
     maxNumberOfProducts: 1,
     maxNumberOfVisits: 5000,
-    canAccessAnalytics: false,
+    canAccessAnalytics: true,
     canCustomizeBanner: false,
     canRemoveBranding: false,
     stripePriceId: null,

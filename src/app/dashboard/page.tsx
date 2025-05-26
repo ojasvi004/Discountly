@@ -14,7 +14,7 @@ const DashboardPage = async () => {
     return null;
   }
 
-  let products = [];
+  let products: Array<{ id: string; name: string; url: string; description?: string | null }> = [];
   try {
     products = await getProducts(userId, { limit: 6 });
   } catch (error) {
@@ -42,6 +42,7 @@ const DashboardPage = async () => {
           </Link>
         </Button>
       </h2>
+
       <ProductGrid products={products} />
     </div>
   );

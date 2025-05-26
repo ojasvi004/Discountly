@@ -41,7 +41,9 @@ export async function createProduct(data: typeof ProductTable.$inferInsert) {
       .onConflictDoNothing({
         target: ProductCustomizationTable.productId,
       });
-  } catch (e) {
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  catch (e) {
     await db.delete(ProductTable).where(eq(ProductTable.id, newProduct.id));
   }
 

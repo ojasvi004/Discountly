@@ -17,14 +17,20 @@ import { canCustomizeBanner, canRemoveBranding } from "@/server/permissions";
 import ProductCustomizationForm from "@/app/dashboard/_components/forms/ProductCustomizationForm";
 
 export default async function EditProductPage({
-  params: { productId },
-  searchParams: { tab = "details" },
+  params,
+  searchParams,
 }: {
-  params: { productId: string };
-  searchParams: { tab?: string };
+  params: Promise<{ productId: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const { userId, redirectToSignIn } = await auth();
   if (userId == null) return redirectToSignIn();
+
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+
+  const { productId } = resolvedParams;
+  const { tab = "details" } = resolvedSearchParams;
 
   const product = await getProduct({ id: productId, userId });
   if (product == null) return notFound();
@@ -75,6 +81,7 @@ function DetailsTab({
     </Card>
   );
 }
+
 async function CountryTab({
   productId,
   userId,
@@ -114,7 +121,6 @@ async function CustomizationsTab({
   userId: string;
 }) {
   const customization = await getProductCustomization({ productId, userId });
-
   if (customization == null) return notFound();
 
   return (

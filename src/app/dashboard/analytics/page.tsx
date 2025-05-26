@@ -25,6 +25,7 @@ import { getProducts } from "@/server/db/products";
 import { TimezoneDropdownMenuItem } from "../_components/TimezoneDropdownMenuItem";
 
 function sanitizeSearchParams(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: Record<string, any>
 ): Record<string, string> {
   return Object.fromEntries(
@@ -39,22 +40,25 @@ function sanitizeSearchParams(
 export default async function AnalyticsPage({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     interval?: string;
     timezone?: string;
     productId?: string;
-  };
+  }>;
 }) {
   const { userId, redirectToSignIn } = await auth();
   if (userId == null) return redirectToSignIn();
 
-  const interval =
-    CHART_INTERVALS[searchParams.interval as keyof typeof CHART_INTERVALS] ??
-    CHART_INTERVALS.last7Days;
-  const timezone = searchParams.timezone || "UTC";
-  const productId = searchParams.productId;
+  const resolvedSearchParams = await searchParams;
 
-  const safeSearchParams = sanitizeSearchParams(searchParams);
+  const interval =
+    CHART_INTERVALS[
+      resolvedSearchParams.interval as keyof typeof CHART_INTERVALS
+    ] ?? CHART_INTERVALS.last7Days;
+  const timezone = resolvedSearchParams.timezone || "UTC";
+  const productId = resolvedSearchParams.productId;
+
+  const safeSearchParams = sanitizeSearchParams(resolvedSearchParams);
 
   return (
     <>

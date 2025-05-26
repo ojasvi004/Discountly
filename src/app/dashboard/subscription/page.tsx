@@ -15,7 +15,11 @@ import {
 } from "@/data/subscriptionTiers";
 import { formatCompactNumber } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
-import { createCancelSession, createCheckoutSession, createCustomerPortalSession } from "@/server/actions/payment";
+import {
+  createCancelSession,
+  createCheckoutSession,
+  createCustomerPortalSession,
+} from "@/server/actions/payment";
 
 import { getProductCount } from "@/server/db/products";
 import { getProductViewCount } from "@/server/db/productViews";
@@ -34,6 +38,13 @@ export default async function SubscriptionPage() {
     userId,
     startOfMonth(new Date())
   );
+
+  // Wrapper functions to handle form actions properly
+  async function handleCustomerPortalAction() {
+    "use server";
+    await createCustomerPortalSession();
+  }
+
   return (
     <>
       <h1 className="mb-6 text-3xl font-semibold">Your Subscription</h1>
@@ -78,7 +89,7 @@ export default async function SubscriptionPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={createCustomerPortalSession}>
+              <form action={handleCustomerPortalAction}>
                 <Button
                   variant="accent"
                   className="text-lg rounded-lg"
@@ -112,12 +123,24 @@ function PricingCard({
 }: (typeof subscriptionTiersInOrder)[number] & { currentTierName: TierNames }) {
   const isCurrent = currentTierName === name;
 
+  async function handleCancelAction() {
+    "use server";
+    await createCancelSession();
+  }
+
+  async function handleCheckoutAction() {
+    "use server";
+    if (name !== "Free") {
+      await createCheckoutSession(name);
+    }
+  }
+
   return (
     <Card className="shadow-none rounded-3xl overflow-hidden">
       <CardHeader>
         <div className="text-accent font-semibold mb-8">{name}</div>
         <CardTitle className="text-xl font-bold">
-          ${priceInRupees } /mo
+          ${priceInRupees} /mo
         </CardTitle>
         <CardDescription>
           {formatCompactNumber(maxNumberOfVisits)} pricing page visits/mo
@@ -125,11 +148,7 @@ function PricingCard({
       </CardHeader>
       <CardContent>
         <form
-          action={
-            name === "Free"
-              ? createCancelSession
-              : createCheckoutSession.bind(null, name)
-          }
+          action={name === "Free" ? handleCancelAction : handleCheckoutAction}
         >
           <Button
             disabled={isCurrent}
@@ -148,7 +167,9 @@ function PricingCard({
         <Feature>Discountly discounts</Feature>
         {canCustomizeBanner && <Feature>Banner customization</Feature>}
         {canAccessAnalytics && <Feature>Advanced analytics</Feature>}
-        {canRemoveBranding && <Feature>Remove Easy Discountly branding</Feature>}
+        {canRemoveBranding && (
+          <Feature>Remove Easy Discountly branding</Feature>
+        )}
       </CardFooter>
     </Card>
   );

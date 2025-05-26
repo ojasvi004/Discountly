@@ -29,7 +29,7 @@ export function getIdTag(id: string, tag: keyof typeof CACHE_TAGS) {
 export function clearFullCache() {
   revalidateTag("*");
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function dbCache<T extends (...args: any[]) => Promise<any>>(
   cb: Parameters<typeof unstable_cache<T>>[0],
   { tags }: { tags: ValidTags[] }
